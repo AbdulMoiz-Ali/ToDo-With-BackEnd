@@ -1,23 +1,25 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:3000"; // Replace with your API URL
+const api = axios.create({
+    baseURL: "https://j2zkt07v-4000.inc1.devtunnels.ms/api", // Replace with your actual backend URL
+});
 
+// Fetch all todos
 export const getTodos = async () => {
-    const response = await axios.get(`${API_URL}/todos`);
-    return response.data;
+    return await api.get("/todos");
 };
 
+// Add a new todo
 export const addTodo = async (todo) => {
-    const response = await axios.post(`${API_URL}/todo`, todo);
-    return response.data;
+    return await api.post("/todo", todo);
 };
 
+// Update a todo
+export const updateTodo = async (id, todo) => {
+    return await api.put(`/todo/${id}`, todo);
+};
+
+// Delete a todo
 export const deleteTodo = async (id) => {
-    const response = await axios.delete(`${API_URL}/deletetodo/${id}`);
-    return response.data;
-};
-
-export const updateTodo = async (id, updatedTodo) => {
-    const response = await axios.put(`${API_URL}/updatetodo/${id}`, updatedTodo);
-    return response.data;
+    return await api.delete(`/todo/${id}`);
 };

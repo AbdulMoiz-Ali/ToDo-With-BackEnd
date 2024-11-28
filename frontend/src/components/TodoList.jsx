@@ -5,21 +5,23 @@ const TodoList = ({ todos, onDelete, onEdit }) => {
         <div className="mt-6">
             {todos.map((todo) => (
                 <div
-                    key={todo.id}
+                    key={todo._id} // Use _id as key to prevent issues with React rendering
                     className="flex justify-between items-center bg-gray-50 p-4 rounded-lg shadow-md mb-3"
                 >
-                    <span className="text-lg font-medium">
-                        {todo.title}
-                    </span>
+                    <div className="flex flex-col">
+                        <span className="text-lg font-semibold">{todo.title}</span>
+                        <span className="text-sm text-gray-500 font-medium">{todo.description}</span>
+                    </div>
+
                     <div className="flex gap-2">
                         <button
-                            onClick={() => onEdit(todo)}
+                            onClick={() => onEdit(todo)} // Pass the whole todo object to onEdit
                             className="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-1 rounded-lg shadow"
                         >
                             Edit
                         </button>
                         <button
-                            onClick={() => onDelete(todo.id)}
+                            onClick={() => onDelete(todo._id)} // Use _id for delete
                             className="bg-red-500 hover:bg-red-600 text-white px-4 py-1 rounded-lg shadow"
                         >
                             Delete
